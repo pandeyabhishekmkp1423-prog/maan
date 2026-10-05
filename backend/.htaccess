@@ -1,0 +1,7 @@
+# Block direct directory browsing
+Options -Indexes
+
+# Protect configuration, database schema, and helpers from direct HTTP requests
+<FilesMatch "^(database\.php|session\.php|schema\.sql|.*\.log)$">
+  Require all denied
+</FilesMatch>

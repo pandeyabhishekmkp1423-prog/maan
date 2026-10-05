@@ -1,0 +1,48 @@
+# ============================================================
+# MaanWin51 - Production Apache Configuration (.htaccess)
+# Brand: MaanWin51 (https://maanwin51.com/)
+# ============================================================
+
+Options -Indexes
+ServerSignature Off
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Enforce HTTPS in production
+  RewriteCond %{HTTPS} off
+  RewriteCond %{HTTP_HOST} ^maanwin51\.com$ [NC,OR]
+  RewriteCond %{HTTP_HOST} ^www\.maanwin51\.com$ [NC]
+  RewriteRule ^(.*)$ https://maanwin51.com/$1 [L,R=301]
+
+  # Block direct access to sensitive files and directories
+  RewriteRule ^(\.git|\.env|backend/config|backend/database) - [F,L,NC]
+
+  # Route /api/ requests to the backend PHP scripts
+  RewriteCond %{REQUEST_URI} ^/api/(.*)$
+  RewriteCond %{DOCUMENT_ROOT}/backend/api/%1.php -f
+  RewriteRule ^api/(.*)$ /backend/api/$1.php [L,QSA]
+
+  RewriteCond %{REQUEST_URI} ^/api/(.*)$
+  RewriteCond %{DOCUMENT_ROOT}/backend/api/%1 -f
+  RewriteRule ^api/(.*)$ /backend/api/$1 [L,QSA]
+
+  # Route all other frontend requests to the React SPA (dist/index.html or index.html)
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} !^/api/
+  RewriteRule ^(.*)$ /index.html [L]
+</IfModule>
+
+# Security Headers
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set X-XSS-Protection "1; mode=block"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Deny access to hidden dotfiles (.env, .git, etc.)
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
