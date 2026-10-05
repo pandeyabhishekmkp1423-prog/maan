@@ -23,17 +23,18 @@ const PasswordInput = ({
   return (
     <div className={`w-full ${className}`}>
       {label && (
-        <label htmlFor={inputId} className="block text-sm font-semibold text-[#111827] mb-1.5">
-          {label} {required && <span className="text-[#E53935]">*</span>}
+        <label htmlFor={inputId} className="block text-sm font-semibold text-[#E2E8F0] mb-1.5">
+          {label} {required && <span className="text-amber-400">*</span>}
         </label>
       )}
 
       <div className="relative flex items-center">
-        <div className="absolute left-4 text-[#9CA3AF] pointer-events-none flex items-center justify-center">
+        <div className="absolute left-4 text-[#64748B] pointer-events-none flex items-center justify-center">
           <Lock className="w-5 h-5" aria-hidden="true" />
         </div>
 
         <input
+          ref={undefined}
           id={inputId}
           name={name}
           type={showPassword ? 'text' : 'password'}
@@ -45,12 +46,12 @@ const PasswordInput = ({
           autoComplete={autoComplete}
           aria-invalid={!!error}
           aria-describedby={error ? errorId : undefined}
-          className={`w-full h-[52px] bg-[#F9FAFB] text-[#111827] placeholder-[#9CA3AF] text-[15px] rounded-[14px] border pl-11 pr-12 transition-all duration-200 outline-none
+          className={`w-full h-[52px] bg-[#0A0D15] text-white placeholder-[#64748B] text-[15px] rounded-[14px] border pl-11 pr-12 transition-all duration-200 outline-none
             ${error
-              ? 'border-[#DC2626] bg-[#FFF5F5] focus:border-[#DC2626] focus:ring-3 focus:ring-[#DC2626]/15'
-              : 'border-[#E5E7EB] hover:border-[#D1D5DB] focus:border-[#E53935] focus:bg-white focus:ring-3 focus:ring-[#E53935]/15'
+              ? 'border-red-500/60 bg-red-950/20 focus:border-red-500 focus:ring-2 focus:ring-red-500/20'
+              : 'border-[#1E283D] hover:border-[#2A3752] focus:border-amber-400 focus:bg-[#0A0D15] focus:ring-2 focus:ring-amber-400/20'
             }
-            disabled:bg-[#F3F4F6] disabled:text-[#9CA3AF] disabled:cursor-not-allowed
+            disabled:bg-[#07090E] disabled:text-[#64748B] disabled:border-[#141B2A] disabled:cursor-not-allowed
           `}
         />
 
@@ -59,7 +60,7 @@ const PasswordInput = ({
           onClick={() => setShowPassword((prev) => !prev)}
           disabled={disabled}
           aria-label={showPassword ? 'Hide password' : 'Show password'}
-          className="absolute right-3.5 p-1.5 text-[#9CA3AF] hover:text-[#4B5563] rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E53935]/30 cursor-pointer disabled:cursor-not-allowed"
+          className="absolute right-3.5 p-1.5 text-[#64748B] hover:text-amber-400 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400/30 cursor-pointer disabled:cursor-not-allowed"
         >
           {showPassword ? (
             <EyeOff className="w-5 h-5" aria-hidden="true" />
@@ -70,12 +71,12 @@ const PasswordInput = ({
       </div>
 
       {error ? (
-        <div id={errorId} className="flex items-center gap-1.5 mt-1.5 text-xs font-medium text-[#DC2626]" role="alert">
+        <div id={errorId} className="flex items-center gap-1.5 mt-1.5 text-xs font-medium text-red-400" role="alert">
           <AlertCircle className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
           <span>{error}</span>
         </div>
       ) : helperText ? (
-        <p className="mt-1.5 text-xs text-[#6B7280]">{helperText}</p>
+        <p className="mt-1.5 text-xs text-[#64748B]">{helperText}</p>
       ) : null}
     </div>
   );

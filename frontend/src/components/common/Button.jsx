@@ -18,10 +18,12 @@ const Button = ({
   const baseStyles = 'inline-flex items-center justify-center font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 active:scale-[0.99] select-none cursor-pointer';
 
   const variants = {
-    primary: 'bg-[#E53935] hover:bg-[#C62828] text-white shadow-sm focus-visible:ring-[#E53935] disabled:bg-[#E5E7EB] disabled:text-[#9CA3AF] disabled:shadow-none disabled:cursor-not-allowed',
-    secondary: 'bg-[#FFF5F5] hover:bg-[#FEE2E2] text-[#E53935] border border-[#FEE2E2] focus-visible:ring-[#E53935] disabled:bg-[#F9FAFB] disabled:text-[#9CA3AF] disabled:border-[#E5E7EB] disabled:cursor-not-allowed',
-    outline: 'bg-white hover:bg-[#F9FAFB] text-[#111827] border border-[#E5E7EB] hover:border-[#D1D5DB] focus-visible:ring-[#E53935] disabled:bg-[#F9FAFB] disabled:text-[#9CA3AF] disabled:cursor-not-allowed',
-    ghost: 'bg-transparent hover:bg-slate-100 text-[#6B7280] hover:text-[#111827] focus-visible:ring-slate-300 disabled:opacity-50 disabled:cursor-not-allowed',
+    primary: 'bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-500 text-black font-extrabold shadow-lg shadow-amber-500/25 focus-visible:ring-amber-400 disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed',
+    gold: 'bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-500 text-black font-extrabold shadow-lg shadow-amber-500/25 focus-visible:ring-amber-400 disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed',
+    blue: 'bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-extrabold shadow-lg shadow-blue-600/30 focus-visible:ring-blue-500 active:scale-[0.99] disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed',
+    secondary: 'bg-[#141B2A] hover:bg-[#1E293B] text-amber-400 border border-[#212E46] focus-visible:ring-amber-400 disabled:opacity-50 disabled:cursor-not-allowed',
+    outline: 'bg-transparent hover:bg-[#141B2A] text-white border border-[#1E283D] hover:border-amber-400/50 focus-visible:ring-amber-400 disabled:opacity-50 disabled:cursor-not-allowed',
+    ghost: 'bg-transparent hover:bg-[#141B2A] text-[#94A3B8] hover:text-white focus-visible:ring-amber-400 disabled:opacity-50 disabled:cursor-not-allowed',
   };
 
   const sizes = {

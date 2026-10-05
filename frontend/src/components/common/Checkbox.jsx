@@ -33,26 +33,26 @@ const Checkbox = ({
           <div
             className={`w-5 h-5 rounded-md border flex items-center justify-center transition-all duration-200
               ${checked
-                ? 'bg-[#E53935] border-[#E53935] text-white shadow-xs'
+                ? 'bg-gradient-to-r from-amber-500 to-amber-400 border-amber-400 text-black shadow-xs shadow-amber-500/30'
                 : error
-                  ? 'border-[#DC2626] bg-[#FFF5F5]'
-                  : 'border-[#D1D5DB] bg-white group-hover:border-[#9CA3AF]'
+                  ? 'border-red-500/60 bg-red-950/30'
+                  : 'border-[#1E283D] bg-[#0A0D15] group-hover:border-[#334155]'
               }
-              peer-focus-visible:ring-2 peer-focus-visible:ring-[#E53935]/40 peer-focus-visible:ring-offset-1
-              peer-disabled:bg-slate-100 peer-disabled:border-slate-300 peer-disabled:cursor-not-allowed
+              peer-focus-visible:ring-2 peer-focus-visible:ring-amber-400/40 peer-focus-visible:ring-offset-1 peer-focus-visible:ring-offset-[#07090E]
+              peer-disabled:bg-[#07090E] peer-disabled:border-[#141B2A] peer-disabled:cursor-not-allowed
             `}
           >
-            {checked && <Check className="w-3.5 h-3.5 stroke-[3]" aria-hidden="true" />}
+            {checked && <Check className="w-3.5 h-3.5 stroke-[3] text-black" aria-hidden="true" />}
           </div>
         </div>
 
-        <div className="text-[13px] sm:text-sm text-[#4B5563] leading-relaxed">
+        <div className="text-[13px] sm:text-sm text-[#94A3B8] leading-relaxed">
           {label}
         </div>
       </label>
 
       {error && (
-        <div className="flex items-center gap-1.5 mt-1 text-xs font-medium text-[#DC2626]" role="alert">
+        <div className="flex items-center gap-1.5 mt-1 text-xs font-medium text-red-400" role="alert">
           <AlertCircle className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
           <span>{error}</span>
         </div>

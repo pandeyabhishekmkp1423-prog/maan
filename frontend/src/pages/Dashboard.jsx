@@ -103,9 +103,9 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] flex flex-col">
+    <div className="min-h-screen bg-[#07090E] flex flex-col text-slate-100">
       {/* Top Navbar */}
-      <header className="w-full bg-white border-b border-[#E5E7EB] sticky top-0 z-30">
+      <header className="w-full bg-[#07090E]/90 border-b border-[#141B2A] backdrop-blur-md sticky top-0 z-30">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link to="/" aria-label="Home">
@@ -115,7 +115,7 @@ const Dashboard = () => {
                 className="h-10 sm:h-12 w-auto object-contain rounded-lg"
               />
             </Link>
-            <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-100 text-[#6B7280]">
+            <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-[#0F1420] border border-[#1E283D] text-amber-400">
               Dashboard
             </span>
           </div>
@@ -141,16 +141,16 @@ const Dashboard = () => {
       {/* Main Content Area */}
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
         {/* Welcome Greeting Banner */}
-        <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-white via-white to-[#FFF5F5] border border-[#E5E7EB] shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-[#0F1420] via-[#141B2A] to-[#0F1420] border border-[#1E283D] shadow-2xl flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-1.5">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-50 text-[#16A34A] border border-green-200 text-xs font-semibold">
-              <span className="w-2 h-2 rounded-full bg-[#16A34A] animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/40 text-emerald-400 border border-emerald-500/30 text-xs font-semibold">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               Verified Session Active
             </div>
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#111827] tracking-tight">
-              Welcome back, <span className="text-[#E53935]">{user?.name || 'MaanWin51 User'}</span>
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight">
+              Welcome back, <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-300">{user?.name || 'MaanWin51 User'}</span>
             </h1>
-            <p className="text-sm text-[#6B7280]">
+            <p className="text-sm text-[#94A3B8]">
               Your authenticated session is active and secured with HttpOnly cookies and database verification.
             </p>
           </div>
@@ -160,7 +160,7 @@ const Dashboard = () => {
             <button
               type="button"
               onClick={refreshUser}
-              className="px-4 py-2 text-xs font-semibold rounded-xl bg-white border border-[#E5E7EB] hover:bg-[#F9FAFB] text-[#4B5563] transition-colors cursor-pointer"
+              className="px-4 py-2 text-xs font-semibold rounded-xl bg-[#0A0D15] border border-[#1E283D] hover:border-amber-400/40 text-slate-200 hover:text-white transition-colors cursor-pointer"
             >
               Sync Profile
             </button>
@@ -170,15 +170,15 @@ const Dashboard = () => {
         {/* User Account Overview Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Card 1: Account Information */}
-          <div className="md:col-span-2 bg-white rounded-3xl border border-[#E5E7EB] p-6 sm:p-7 shadow-xs space-y-5">
-            <div className="flex items-center justify-between border-b border-[#F1F5F9] pb-4">
+          <div className="md:col-span-2 bg-[#0F1420] rounded-3xl border border-[#1E283D] p-6 sm:p-7 shadow-2xl space-y-5">
+            <div className="flex items-center justify-between border-b border-[#141B2A] pb-4">
               <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-xl bg-[#FFF5F5] text-[#E53935] flex items-center justify-center">
+                <div className="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center border border-amber-500/20">
                   <User className="w-5 h-5" />
                 </div>
-                <h2 className="text-lg font-bold text-[#111827]">Account Information</h2>
+                <h2 className="text-lg font-bold text-white">Account Information</h2>
               </div>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-950/40 text-emerald-400 border border-emerald-500/30">
                 <CheckCircle2 className="w-3.5 h-3.5" />
                 {user?.status || 'Active'}
               </span>
@@ -186,87 +186,87 @@ const Dashboard = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Name */}
-              <div className="p-4 rounded-2xl bg-[#F9FAFB] border border-[#E5E7EB]">
-                <div className="text-xs font-semibold text-[#6B7280] mb-1">Display Name</div>
-                <div className="text-base font-bold text-[#111827]">{user?.name || 'User'}</div>
+              <div className="p-4 rounded-2xl bg-[#0A0D15] border border-[#1E283D]">
+                <div className="text-xs font-semibold text-[#64748B] mb-1">Display Name</div>
+                <div className="text-base font-bold text-white">{user?.name || 'User'}</div>
               </div>
 
               {/* User ID */}
-              <div className="p-4 rounded-2xl bg-[#F9FAFB] border border-[#E5E7EB]">
-                <div className="text-xs font-semibold text-[#6B7280] mb-1">User ID</div>
-                <div className="text-base font-mono font-bold text-[#111827]">#{user?.id}</div>
+              <div className="p-4 rounded-2xl bg-[#0A0D15] border border-[#1E283D]">
+                <div className="text-xs font-semibold text-[#64748B] mb-1">User ID</div>
+                <div className="text-base font-mono font-bold text-amber-400">#{user?.id}</div>
               </div>
 
               {/* Phone */}
-              <div className="p-4 rounded-2xl bg-[#F9FAFB] border border-[#E5E7EB]">
-                <div className="flex items-center gap-1.5 text-xs font-semibold text-[#6B7280] mb-1">
-                  <Phone className="w-3.5 h-3.5" />
+              <div className="p-4 rounded-2xl bg-[#0A0D15] border border-[#1E283D]">
+                <div className="flex items-center gap-1.5 text-xs font-semibold text-[#64748B] mb-1">
+                  <Phone className="w-3.5 h-3.5 text-amber-400" />
                   <span>Phone Number</span>
                 </div>
-                <div className="text-base font-bold text-[#111827]">
+                <div className="text-base font-bold text-white">
                   {user?.phone ? (
                     <span>
-                      <span className="text-xs font-semibold text-[#6B7280] mr-1.5">{user.country_code}</span>
+                      <span className="text-xs font-semibold text-amber-400/80 mr-1.5">{user.country_code}</span>
                       {user.phone}
                     </span>
                   ) : (
-                    <span className="text-sm text-[#9CA3AF] font-normal">Not configured</span>
+                    <span className="text-sm text-[#64748B] font-normal">Not configured</span>
                   )}
                 </div>
               </div>
 
               {/* Email */}
-              <div className="p-4 rounded-2xl bg-[#F9FAFB] border border-[#E5E7EB]">
-                <div className="flex items-center gap-1.5 text-xs font-semibold text-[#6B7280] mb-1">
-                  <Mail className="w-3.5 h-3.5" />
+              <div className="p-4 rounded-2xl bg-[#0A0D15] border border-[#1E283D]">
+                <div className="flex items-center gap-1.5 text-xs font-semibold text-[#64748B] mb-1">
+                  <Mail className="w-3.5 h-3.5 text-amber-400" />
                   <span>Email Address</span>
                 </div>
-                <div className="text-base font-bold text-[#111827] truncate">
-                  {user?.email || <span className="text-sm text-[#9CA3AF] font-normal">Not configured</span>}
+                <div className="text-base font-bold text-white truncate">
+                  {user?.email || <span className="text-sm text-[#64748B] font-normal">Not configured</span>}
                 </div>
               </div>
 
               {/* Registered At */}
-              <div className="p-4 rounded-2xl bg-[#F9FAFB] border border-[#E5E7EB]">
-                <div className="flex items-center gap-1.5 text-xs font-semibold text-[#6B7280] mb-1">
-                  <Calendar className="w-3.5 h-3.5" />
+              <div className="p-4 rounded-2xl bg-[#0A0D15] border border-[#1E283D]">
+                <div className="flex items-center gap-1.5 text-xs font-semibold text-[#64748B] mb-1">
+                  <Calendar className="w-3.5 h-3.5 text-amber-400" />
                   <span>Registered On</span>
                 </div>
-                <div className="text-sm font-semibold text-[#111827]">
+                <div className="text-sm font-semibold text-slate-200">
                   {formatDate(user?.created_at)}
                 </div>
               </div>
 
               {/* Last Login */}
-              <div className="p-4 rounded-2xl bg-[#F9FAFB] border border-[#E5E7EB]">
-                <div className="flex items-center gap-1.5 text-xs font-semibold text-[#6B7280] mb-1">
-                  <Clock className="w-3.5 h-3.5" />
+              <div className="p-4 rounded-2xl bg-[#0A0D15] border border-[#1E283D]">
+                <div className="flex items-center gap-1.5 text-xs font-semibold text-[#64748B] mb-1">
+                  <Clock className="w-3.5 h-3.5 text-amber-400" />
                   <span>Last Sign-In</span>
                 </div>
-                <div className="text-sm font-semibold text-[#111827]">
+                <div className="text-sm font-semibold text-slate-200">
                   {formatDate(user?.last_login_at)}
                 </div>
               </div>
             </div>
 
             {/* Invite / Referral Code */}
-            <div className="p-4 rounded-2xl bg-[#FFF5F5] border border-[#FEE2E2] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="p-4 rounded-2xl bg-gradient-to-r from-[#141B2A] to-[#0A0D15] border border-amber-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
-                <span className="text-xs font-bold text-[#C62828] uppercase tracking-wider block">
+                <span className="text-xs font-bold text-amber-400 uppercase tracking-wider block">
                   Your Personal Invite Code
                 </span>
-                <span className="text-lg font-mono font-extrabold text-[#111827]">
+                <span className="text-lg font-mono font-extrabold text-white">
                   {user?.invite_code || 'MWDEFAULT'}
                 </span>
               </div>
               <button
                 type="button"
                 onClick={handleCopyInviteCode}
-                className="inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-white hover:bg-slate-50 border border-[#FEE2E2] text-xs font-bold text-[#E53935] rounded-xl shadow-xs transition-colors cursor-pointer"
+                className="inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-500 text-xs font-extrabold text-black rounded-xl shadow-lg shadow-amber-500/20 transition-all cursor-pointer"
               >
                 {copied ? (
                   <>
-                    <Check className="w-4 h-4 text-emerald-600" />
+                    <Check className="w-4 h-4 stroke-[3]" />
                     <span>Copied!</span>
                   </>
                 ) : (
@@ -280,44 +280,44 @@ const Dashboard = () => {
           </div>
 
           {/* Card 2: Security & Session Status */}
-          <div className="bg-white rounded-3xl border border-[#E5E7EB] p-6 sm:p-7 shadow-xs space-y-5 flex flex-col justify-between">
+          <div className="bg-[#0F1420] rounded-3xl border border-[#1E283D] p-6 sm:p-7 shadow-2xl space-y-5 flex flex-col justify-between">
             <div className="space-y-4">
-              <div className="flex items-center gap-2.5 border-b border-[#F1F5F9] pb-4">
-                <div className="w-9 h-9 rounded-xl bg-green-50 text-[#16A34A] flex items-center justify-center">
+              <div className="flex items-center gap-2.5 border-b border-[#141B2A] pb-4">
+                <div className="w-9 h-9 rounded-xl bg-emerald-950/40 text-emerald-400 flex items-center justify-center border border-emerald-500/30">
                   <ShieldCheck className="w-5 h-5" />
                 </div>
-                <h3 className="text-lg font-bold text-[#111827]">Security Status</h3>
+                <h3 className="text-lg font-bold text-white">Security Status</h3>
               </div>
 
               <div className="space-y-3">
-                <div className="flex items-start gap-3 p-3 rounded-xl bg-[#F9FAFB] border border-[#E5E7EB]">
-                  <Lock className="w-4 h-4 text-[#16A34A] shrink-0 mt-0.5" />
+                <div className="flex items-start gap-3 p-3 rounded-xl bg-[#0A0D15] border border-[#1E283D]">
+                  <Lock className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                   <div className="text-xs">
-                    <p className="font-bold text-[#111827]">Secure Cookie Session</p>
-                    <p className="text-[#6B7280]">HttpOnly, SameSite=Lax enabled</p>
+                    <p className="font-bold text-white">Secure Cookie Session</p>
+                    <p className="text-[#94A3B8]">HttpOnly, SameSite=Lax enabled</p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3 p-3 rounded-xl bg-[#F9FAFB] border border-[#E5E7EB]">
-                  <ShieldCheck className="w-4 h-4 text-[#16A34A] shrink-0 mt-0.5" />
+                <div className="flex items-start gap-3 p-3 rounded-xl bg-[#0A0D15] border border-[#1E283D]">
+                  <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                   <div className="text-xs">
-                    <p className="font-bold text-[#111827]">Password Cryptography</p>
-                    <p className="text-[#6B7280]">Bcrypt hashed via PHP password_hash</p>
+                    <p className="font-bold text-white">Password Cryptography</p>
+                    <p className="text-[#94A3B8]">Bcrypt hashed via PHP password_hash</p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3 p-3 rounded-xl bg-[#F9FAFB] border border-[#E5E7EB]">
-                  <CheckCircle2 className="w-4 h-4 text-[#16A34A] shrink-0 mt-0.5" />
+                <div className="flex items-start gap-3 p-3 rounded-xl bg-[#0A0D15] border border-[#1E283D]">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                   <div className="text-xs">
-                    <p className="font-bold text-[#111827]">Server Authority</p>
-                    <p className="text-[#6B7280]">Real-time MySQL active status verification</p>
+                    <p className="font-bold text-white">Server Authority</p>
+                    <p className="text-[#94A3B8]">Real-time MySQL active status verification</p>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Logout Action Card */}
-            <div className="pt-4 border-t border-[#F1F5F9]">
+            <div className="pt-4 border-t border-[#141B2A]">
               <Button
                 type="button"
                 variant="secondary"
@@ -333,16 +333,16 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* Optional Notification Consent Box (Per Spec Rule 41) */}
+        {/* Optional Notification Consent Box */}
         {notificationState === 'prompt' && (
-          <div className="p-5 sm:p-6 rounded-3xl bg-white border border-[#E5E7EB] shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="p-5 sm:p-6 rounded-3xl bg-[#0F1420] border border-[#1E283D] shadow-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex items-start gap-3.5">
-              <div className="w-10 h-10 rounded-2xl bg-[#FFF5F5] text-[#E53935] flex items-center justify-center shrink-0">
+              <div className="w-10 h-10 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0 border border-amber-500/20">
                 <Bell className="w-5 h-5" />
               </div>
               <div>
-                <h4 className="text-sm font-bold text-[#111827]">Enable Important Account Notifications</h4>
-                <p className="text-xs text-[#6B7280] mt-0.5">
+                <h4 className="text-sm font-bold text-white">Enable Important Account Notifications</h4>
+                <p className="text-xs text-[#94A3B8] mt-0.5">
                   Receive important account security alerts and verification updates directly in your browser.
                 </p>
               </div>
@@ -352,14 +352,14 @@ const Dashboard = () => {
               <button
                 type="button"
                 onClick={() => setNotificationState('dismissed')}
-                className="px-4 py-2 text-xs font-semibold text-[#6B7280] hover:text-[#111827] rounded-xl hover:bg-slate-100 transition-colors cursor-pointer"
+                className="px-4 py-2 text-xs font-semibold text-[#94A3B8] hover:text-white rounded-xl hover:bg-[#141B2A] transition-colors cursor-pointer"
               >
                 Not now
               </button>
               <button
                 type="button"
                 onClick={handleRequestNotification}
-                className="px-4 py-2 text-xs font-semibold text-white bg-[#E53935] hover:bg-[#C62828] rounded-xl shadow-xs transition-colors cursor-pointer"
+                className="px-4 py-2 text-xs font-extrabold text-black bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-500 rounded-xl shadow-lg shadow-amber-500/20 transition-all cursor-pointer"
               >
                 Enable Notifications
               </button>
@@ -369,7 +369,7 @@ const Dashboard = () => {
       </main>
 
       {/* Clean Dashboard Footer */}
-      <footer className="border-t border-[#E5E7EB] py-6 text-center text-xs text-[#9CA3AF]">
+      <footer className="border-t border-[#141B2A] py-6 text-center text-xs text-[#64748B]">
         MaanWin51 Production Authentication System &middot; https://maanwin51.com/
       </footer>
     </div>

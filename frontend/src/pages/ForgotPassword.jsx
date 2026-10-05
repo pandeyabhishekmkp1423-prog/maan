@@ -154,22 +154,22 @@ const ForgotPassword = () => {
         <>
           {requestSubmitted ? (
             <div className="space-y-5 text-center py-2">
-              <div className="w-14 h-14 rounded-2xl bg-green-50 text-[#16A34A] flex items-center justify-center mx-auto border border-green-200">
+              <div className="w-14 h-14 rounded-2xl bg-emerald-950/40 text-emerald-400 flex items-center justify-center mx-auto border border-emerald-500/30">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
 
               <div>
-                <h3 className="text-lg font-bold text-[#111827]">Request Dispatched</h3>
-                <p className="text-sm text-[#6B7280] mt-1.5 leading-relaxed">
+                <h3 className="text-lg font-bold text-white">Request Dispatched</h3>
+                <p className="text-sm text-[#94A3B8] mt-1.5 leading-relaxed">
                   {successInfo}
                 </p>
               </div>
 
               {devToken && (
-                <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-left text-xs text-amber-800 space-y-2">
+                <div className="p-4 rounded-xl bg-amber-950/30 border border-amber-500/30 text-left text-xs text-amber-300 space-y-2">
                   <span className="font-bold">Development Mode Active:</span>
                   <p>Reset token generated for testing:</p>
-                  <code className="block bg-white p-2 rounded border border-amber-300 font-mono break-all text-[11px]">
+                  <code className="block bg-[#0A0D15] p-2 rounded border border-amber-500/40 font-mono break-all text-[11px] text-amber-200">
                     {devToken}
                   </code>
                   <Button
@@ -189,7 +189,7 @@ const ForgotPassword = () => {
 
               <Link
                 to="/login"
-                className="inline-flex items-center justify-center gap-2 text-sm font-semibold text-[#E53935] hover:text-[#C62828] hover:underline"
+                className="inline-flex items-center justify-center gap-2 text-sm font-semibold text-amber-400 hover:text-amber-300 hover:underline"
               >
                 Return to Login
               </Link>
@@ -238,7 +238,7 @@ const ForgotPassword = () => {
               <div className="text-center pt-2">
                 <Link
                   to="/login"
-                  className="text-xs sm:text-sm font-semibold text-[#6B7280] hover:text-[#111827] hover:underline"
+                  className="text-xs sm:text-sm font-semibold text-[#94A3B8] hover:text-white hover:underline"
                 >
                   Remembered your password? Log in
                 </Link>
@@ -253,13 +253,13 @@ const ForgotPassword = () => {
         <>
           {resetSuccess ? (
             <div className="space-y-5 text-center py-2">
-              <div className="w-14 h-14 rounded-2xl bg-green-50 text-[#16A34A] flex items-center justify-center mx-auto border border-green-200">
+              <div className="w-14 h-14 rounded-2xl bg-emerald-950/40 text-emerald-400 flex items-center justify-center mx-auto border border-emerald-500/30">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
 
               <div>
-                <h3 className="text-lg font-bold text-[#111827]">Password Updated!</h3>
-                <p className="text-sm text-[#6B7280] mt-1.5 leading-relaxed">
+                <h3 className="text-lg font-bold text-white">Password Updated!</h3>
+                <p className="text-sm text-[#94A3B8] mt-1.5 leading-relaxed">
                   Your MaanWin51 account password has been updated securely. You may now sign in with your new credentials.
                 </p>
               </div>
@@ -313,7 +313,7 @@ const ForgotPassword = () => {
                 <button
                   type="button"
                   onClick={() => { setMode('request'); setActiveToken(''); }}
-                  className="text-xs sm:text-sm font-semibold text-[#6B7280] hover:text-[#111827] cursor-pointer"
+                  className="text-xs sm:text-sm font-semibold text-[#94A3B8] hover:text-white cursor-pointer"
                 >
                   Request a new reset link
                 </button>

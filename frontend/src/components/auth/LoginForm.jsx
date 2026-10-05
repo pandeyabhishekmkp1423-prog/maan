@@ -168,7 +168,7 @@ const LoginForm = () => {
 
         <Link
           to="/forgot-password"
-          className="text-xs sm:text-sm font-semibold text-[#E53935] hover:text-[#C62828] hover:underline whitespace-nowrap transition-colors"
+          className="text-xs sm:text-sm font-semibold text-amber-400 hover:text-amber-300 hover:underline whitespace-nowrap transition-colors"
         >
           Forgot password?
         </Link>
@@ -177,22 +177,22 @@ const LoginForm = () => {
       {/* Submit Button */}
       <Button
         type="submit"
-        variant="primary"
+        variant="blue"
         loading={loading}
         loadingText="Logging in..."
         disabled={loading}
         fullWidth
-        className="mt-2"
+        className="mt-2 text-base font-extrabold shadow-lg shadow-blue-600/30"
       >
         Log In
       </Button>
 
       {/* Registration Redirect Link */}
-      <div className="text-center pt-3 text-sm text-[#6B7280]">
+      <div className="text-center pt-3 text-sm text-[#94A3B8]">
         Don't have an account?{' '}
         <Link
           to="/register"
-          className="font-bold text-[#E53935] hover:text-[#C62828] hover:underline transition-colors"
+          className="font-bold text-amber-400 hover:text-amber-300 hover:underline transition-colors"
         >
           Register
         </Link>

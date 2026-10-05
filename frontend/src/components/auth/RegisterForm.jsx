@@ -210,7 +210,7 @@ const RegisterForm = ({ openLegalModal }) => {
               <button
                 type="button"
                 onClick={() => openLegalModal && openLegalModal('privacy')}
-                className="text-[#E53935] font-semibold hover:underline cursor-pointer"
+                className="text-amber-400 font-semibold hover:text-amber-300 hover:underline cursor-pointer"
               >
                 Privacy Policy
               </button>{' '}
@@ -218,7 +218,7 @@ const RegisterForm = ({ openLegalModal }) => {
               <button
                 type="button"
                 onClick={() => openLegalModal && openLegalModal('terms')}
-                className="text-[#E53935] font-semibold hover:underline cursor-pointer"
+                className="text-amber-400 font-semibold hover:text-amber-300 hover:underline cursor-pointer"
               >
                 Terms &amp; Conditions
               </button>
@@ -242,11 +242,11 @@ const RegisterForm = ({ openLegalModal }) => {
       </Button>
 
       {/* Login Redirect Link */}
-      <div className="text-center pt-2 text-sm text-[#6B7280]">
+      <div className="text-center pt-2 text-sm text-[#94A3B8]">
         Already have an account?{' '}
         <Link
           to="/login"
-          className="font-bold text-[#E53935] hover:text-[#C62828] hover:underline transition-colors"
+          className="font-bold text-amber-400 hover:text-amber-300 hover:underline transition-colors"
         >
           Log in
         </Link>

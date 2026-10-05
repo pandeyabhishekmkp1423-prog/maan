@@ -14,24 +14,24 @@ const Alert = ({
 
   const styles = {
     error: {
-      container: 'bg-[#FFF5F5] border-[#FEE2E2] text-[#DC2626]',
+      container: 'bg-red-950/40 border-red-500/30 text-red-200',
       icon: AlertCircle,
-      iconColor: 'text-[#DC2626]',
+      iconColor: 'text-red-400',
     },
     success: {
-      container: 'bg-[#F0FDF4] border-[#DCFCE7] text-[#16A34A]',
+      container: 'bg-emerald-950/40 border-emerald-500/30 text-emerald-200',
       icon: CheckCircle2,
-      iconColor: 'text-[#16A34A]',
+      iconColor: 'text-emerald-400',
     },
     warning: {
-      container: 'bg-[#FFFBEB] border-[#FEF3C7] text-[#D97706]',
+      container: 'bg-amber-950/40 border-amber-500/30 text-amber-200',
       icon: AlertTriangle,
-      iconColor: 'text-[#D97706]',
+      iconColor: 'text-amber-400',
     },
     info: {
-      container: 'bg-[#EFF6FF] border-[#DBEAFE] text-[#2563EB]',
+      container: 'bg-blue-950/40 border-blue-500/30 text-blue-200',
       icon: Info,
-      iconColor: 'text-[#2563EB]',
+      iconColor: 'text-blue-400',
     },
   };
 

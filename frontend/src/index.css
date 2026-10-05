@@ -2,19 +2,20 @@
 
 @layer base {
   :root {
-    --brand-red: #E53935;
-    --brand-dark-red: #C62828;
-    --brand-light-red: #FEE2E2;
-    --brand-surface-red: #FFF5F5;
-    --page-bg: #F8FAFC;
-    --text-primary: #111827;
-    --text-secondary: #6B7280;
-    --text-muted: #9CA3AF;
-    --border-color: #E5E7EB;
-    --input-bg: #F9FAFB;
-    --color-success: #16A34A;
+    --brand-gold: #F59E0B;
+    --brand-gold-light: #FBBF24;
+    --brand-blue: #2563EB;
+    --page-bg: #07090E;
+    --surface-bg: #0F1420;
+    --card-bg: #141B2A;
+    --text-primary: #FFFFFF;
+    --text-secondary: #94A3B8;
+    --text-muted: #64748B;
+    --border-color: #1E283D;
+    --input-bg: #0A0D15;
+    --color-success: #10B981;
     --color-warning: #F59E0B;
-    --color-error: #DC2626;
+    --color-error: #EF4444;
   }
 
   body {
@@ -31,20 +32,20 @@
   }
 }
 
-/* Custom subtle scrollbar */
+/* Custom subtle dark scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #F1F5F9;
+  background: #07090E;
 }
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
+  background: #1E283D;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
+  background: #334155;
 }
 
 /* Smooth input and button focus */

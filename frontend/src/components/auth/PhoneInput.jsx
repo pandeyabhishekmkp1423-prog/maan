@@ -58,8 +58,8 @@ const PhoneInput = ({
   return (
     <div className={`w-full ${className}`}>
       {label && (
-        <label htmlFor={id} className="block text-sm font-semibold text-[#111827] mb-1.5">
-          {label} {required && <span className="text-[#E53935]">*</span>}
+        <label htmlFor={id} className="block text-sm font-semibold text-[#E2E8F0] mb-1.5">
+          {label} {required && <span className="text-amber-400">*</span>}
         </label>
       )}
 
@@ -73,18 +73,18 @@ const PhoneInput = ({
             aria-haspopup="listbox"
             aria-expanded={dropdownOpen}
             aria-label="Select Country Code"
-            className="h-[52px] px-3 sm:px-3.5 bg-[#F9FAFB] hover:bg-[#F3F4F6] text-[#111827] border border-[#E5E7EB] border-r-0 rounded-l-[14px] flex items-center gap-1.5 font-medium text-sm transition-colors focus-visible:ring-2 focus-visible:ring-[#E53935]/20 focus-visible:z-10 cursor-pointer disabled:cursor-not-allowed"
+            className="h-[52px] px-3 sm:px-3.5 bg-[#0A0D15] hover:bg-[#141B2A] text-white border border-[#1E283D] border-r-0 rounded-l-[14px] flex items-center gap-1.5 font-medium text-sm transition-colors focus-visible:ring-2 focus-visible:ring-amber-400/20 focus-visible:z-10 cursor-pointer disabled:bg-[#07090E] disabled:text-[#64748B] disabled:cursor-not-allowed"
           >
             <span className="text-base select-none">{selectedCountry.flag}</span>
-            <span className="font-semibold">{selectedCountry.code}</span>
-            <ChevronDown className={`w-3.5 h-3.5 text-[#6B7280] transition-transform duration-150 ${dropdownOpen ? 'rotate-180' : ''}`} />
+            <span className="font-semibold text-slate-100">{selectedCountry.code}</span>
+            <ChevronDown className={`w-3.5 h-3.5 text-amber-400 transition-transform duration-150 ${dropdownOpen ? 'rotate-180' : ''}`} />
           </button>
 
           {dropdownOpen && (
             <div
               role="listbox"
               aria-label="Country Codes"
-              className="absolute left-0 top-[56px] z-50 w-56 max-h-60 overflow-y-auto bg-white rounded-xl shadow-lg border border-[#E5E7EB] py-1 animate-in fade-in zoom-in-95 duration-100"
+              className="absolute left-0 top-[56px] z-50 w-60 max-h-60 overflow-y-auto bg-[#0F1420] rounded-xl shadow-2xl border border-[#1E283D] py-1 animate-in fade-in zoom-in-95 duration-100"
             >
               {COUNTRY_CODES.map((item) => (
                 <button
@@ -93,15 +93,15 @@ const PhoneInput = ({
                   role="option"
                   aria-selected={item.code === countryCode}
                   onClick={() => handleSelectCode(item)}
-                  className={`w-full text-left px-3 py-2 text-sm flex items-center justify-between hover:bg-[#FFF5F5] transition-colors cursor-pointer
-                    ${item.code === countryCode ? 'bg-[#FFF5F5] text-[#E53935] font-semibold' : 'text-[#111827]'}
+                  className={`w-full text-left px-3.5 py-2.5 text-sm flex items-center justify-between hover:bg-[#1A2337] transition-colors cursor-pointer
+                    ${item.code === countryCode ? 'bg-amber-500/15 text-amber-300 font-semibold border-l-2 border-amber-400' : 'text-slate-200'}
                   `}
                 >
-                  <span className="flex items-center gap-2">
-                    <span>{item.flag}</span>
-                    <span>{item.country}</span>
+                  <span className="flex items-center gap-2.5">
+                    <span className="text-base">{item.flag}</span>
+                    <span className="text-xs sm:text-sm font-medium">{item.country}</span>
                   </span>
-                  <span className="text-xs text-[#6B7280] font-mono">{item.code}</span>
+                  <span className="text-xs text-amber-400/90 font-mono font-semibold">{item.code}</span>
                 </button>
               ))}
             </div>
@@ -123,18 +123,18 @@ const PhoneInput = ({
           placeholder={selectedCountry.placeholder}
           aria-invalid={!!error}
           aria-describedby={error ? errorId : undefined}
-          className={`flex-1 h-[52px] bg-[#F9FAFB] text-[#111827] placeholder-[#9CA3AF] text-[15px] rounded-r-[14px] border border-l-0 px-4 transition-all duration-200 outline-none
+          className={`flex-1 h-[52px] bg-[#0A0D15] text-white placeholder-[#64748B] text-[15px] rounded-r-[14px] border border-l-0 px-4 transition-all duration-200 outline-none
             ${error
-              ? 'border-[#DC2626] bg-[#FFF5F5] focus:border-[#DC2626] focus:ring-3 focus:ring-[#DC2626]/15'
-              : 'border-[#E5E7EB] hover:border-[#D1D5DB] focus:border-[#E53935] focus:bg-white focus:ring-3 focus:ring-[#E53935]/15'
+              ? 'border-red-500/60 bg-red-950/20 focus:border-red-500 focus:ring-2 focus:ring-red-500/20'
+              : 'border-[#1E283D] hover:border-[#2A3752] focus:border-amber-400 focus:bg-[#0A0D15] focus:ring-2 focus:ring-amber-400/20'
             }
-            disabled:bg-[#F3F4F6] disabled:text-[#9CA3AF] disabled:cursor-not-allowed
+            disabled:bg-[#07090E] disabled:text-[#64748B] disabled:border-[#141B2A] disabled:cursor-not-allowed
           `}
         />
       </div>
 
       {error && (
-        <div id={errorId} className="flex items-center gap-1.5 mt-1.5 text-xs font-medium text-[#DC2626]" role="alert">
+        <div id={errorId} className="flex items-center gap-1.5 mt-1.5 text-xs font-medium text-red-400" role="alert">
           <AlertCircle className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
           <span>{error}</span>
         </div>

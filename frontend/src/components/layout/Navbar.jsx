@@ -42,6 +42,10 @@ const Navbar = () => {
 
   const handleSmoothScroll = (e, href) => {
     if (href.startsWith('#')) {
+      if (location.pathname !== '/') {
+        window.location.href = '/' + href;
+        return;
+      }
       e.preventDefault();
       const targetId = href.substring(1);
       if (!targetId) {

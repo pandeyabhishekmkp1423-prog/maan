@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { ShieldCheck, Lock, Smartphone, Zap, CheckCircle2, X } from 'lucide-react';
-import AuthHeader from './AuthHeader';
+import { Link, useNavigate } from 'react-router-dom';
+import { ShieldCheck, Lock, Zap, X, ArrowLeft } from 'lucide-react';
+import Navbar from '../layout/Navbar';
+import Footer from '../layout/Footer';
 
 const AuthLayout = ({
   children,
@@ -10,6 +12,7 @@ const AuthLayout = ({
   title,
   subtitle,
 }) => {
+  const navigate = useNavigate();
   const [modalContent, setModalContent] = useState(null);
 
   const openLegalModal = (type) => {
@@ -27,91 +30,56 @@ const AuthLayout = ({
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] flex flex-col">
-      <AuthHeader showBack={showBack} backTo={backTo} backLabel={backLabel} />
+    <div className="min-h-screen bg-[#07090E] flex flex-col text-slate-100 selection:bg-amber-500/30 selection:text-amber-200">
+      <Navbar />
 
-      <main className="flex-1 flex w-full">
-        {/* Left Side: Brand Visual Panel (Desktop only, 50% width) */}
-        <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-white via-[#FFF5F5] to-[#FEE2E2]/30 border-r border-[#E5E7EB] p-12 xl:p-16 flex-col justify-between relative overflow-hidden">
-          {/* Subtle decorative circles */}
-          <div className="absolute top-10 right-10 w-96 h-96 bg-[#FEE2E2]/40 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-red-100/50 rounded-full blur-2xl pointer-events-none" />
+      <main className="flex-1 flex flex-col items-center justify-center pt-28 pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        {/* Ambient Glowing Background Orbs */}
+        <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-amber-500/10 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute bottom-10 right-10 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-40 left-10 w-80 h-80 bg-purple-600/5 rounded-full blur-[120px] pointer-events-none" />
 
-          {/* Top Brand Pill */}
-          <div className="relative z-10">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#E5E7EB] shadow-xs text-xs font-semibold text-[#C62828]">
-              <span className="w-2 h-2 rounded-full bg-[#E53935] animate-pulse" />
-              Official Portal — maanwin51.com
-            </div>
-          </div>
-
-          {/* Center Showcase Content */}
-          <div className="relative z-10 max-w-lg my-auto py-8">
-            <h1 className="text-4xl xl:text-5xl font-extrabold text-[#111827] leading-[1.15] mb-6">
-              Next-Generation <span className="text-[#E53935]">Secure</span> Account Platform
-            </h1>
-            <p className="text-base xl:text-lg text-[#6B7280] leading-relaxed mb-8">
-              Experience fast, modern, and verified access designed with bank-grade session security and seamless single-click authorization.
-            </p>
-
-            {/* Feature Highlights */}
-            <div className="space-y-4">
-              <div className="flex items-start gap-3.5 p-3.5 rounded-2xl bg-white/80 border border-[#E5E7EB] shadow-xs">
-                <div className="w-10 h-10 rounded-xl bg-[#FFF5F5] text-[#E53935] flex items-center justify-center shrink-0">
-                  <ShieldCheck className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="text-sm font-bold text-[#111827]">Secure Password Hashing</h4>
-                  <p className="text-xs text-[#6B7280]">Advanced cryptographic password algorithms with zero plain-text storage.</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3.5 p-3.5 rounded-2xl bg-white/80 border border-[#E5E7EB] shadow-xs">
-                <div className="w-10 h-10 rounded-xl bg-[#FFF5F5] text-[#E53935] flex items-center justify-center shrink-0">
-                  <Smartphone className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="text-sm font-bold text-[#111827]">Multi-Channel Verification</h4>
-                  <p className="text-xs text-[#6B7280]">Flexible authentication via registered Indian & international mobile numbers or email.</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3.5 p-3.5 rounded-2xl bg-white/80 border border-[#E5E7EB] shadow-xs">
-                <div className="w-10 h-10 rounded-xl bg-[#FFF5F5] text-[#E53935] flex items-center justify-center shrink-0">
-                  <Zap className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="text-sm font-bold text-[#111827]">Instant Automatic Login</h4>
-                  <p className="text-xs text-[#6B7280]">Seamless onboarding with direct authenticated session creation upon registration.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom Trust Footer */}
-          <div className="relative z-10 flex items-center gap-6 text-xs text-[#6B7280] pt-6 border-t border-[#E5E7EB]/60">
-            <span className="flex items-center gap-1.5">
-              <Lock className="w-3.5 h-3.5 text-[#16A34A]" /> 256-Bit SSL Protection
-            </span>
-            <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5 text-[#16A34A]" /> Brute-Force Rate Limiting
-            </span>
+        {/* Brand Pill */}
+        <div className="relative z-10 mb-6 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0F1420] border border-amber-500/30 shadow-lg shadow-black/50 text-xs font-bold text-amber-300">
+            <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+            Official Authentication &bull; maanwin51.com
           </div>
         </div>
 
-        {/* Right Side: Authentication Form Card (Full width mobile, 50% desktop) */}
-        <div className="w-full lg:w-1/2 flex items-center justify-center p-4 sm:p-8 xl:p-12">
-          <div className="w-full max-w-[440px] sm:max-w-[460px] bg-white rounded-2xl sm:rounded-3xl border border-[#E5E7EB] shadow-xs p-6 sm:p-9 my-auto">
-            {/* Header Titles */}
+        {/* Center Auth Card */}
+        <div className="relative z-10 w-full max-w-[460px] sm:max-w-[480px]">
+          {/* Card Top Glowing Border Gradient */}
+          <div className="h-1 w-full bg-gradient-to-r from-transparent via-amber-400 to-transparent rounded-t-3xl" />
+
+          <div className="bg-[#0F1420] rounded-b-3xl border border-[#1E283D] border-t-0 shadow-2xl shadow-black/90 p-6 sm:p-9 relative">
+            {/* Back button if enabled */}
+            {showBack && (
+              <button
+                type="button"
+                onClick={() => navigate(backTo)}
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#94A3B8] hover:text-white mb-4 px-2.5 py-1 rounded-lg border border-[#1E283D] bg-[#0A0D15] hover:bg-[#141B2A] transition-colors cursor-pointer"
+                aria-label={backLabel}
+              >
+                <ArrowLeft className="w-3.5 h-3.5 text-amber-400" />
+                <span>{backLabel}</span>
+              </button>
+            )}
+
+            {/* Logo & Header */}
             <div className="text-center mb-6">
-              <div className="inline-flex lg:hidden w-12 h-12 rounded-2xl bg-[#E53935] items-center justify-center text-white font-extrabold text-lg mb-4 shadow-sm">
-                M51
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#111827] tracking-tight">
+              <Link to="/" className="inline-block mb-3 group focus:outline-none" aria-label="MaanWin51 Home">
+                <img
+                  src="/logo.jpeg"
+                  alt="MaanWin51 Logo"
+                  className="h-14 sm:h-16 w-auto object-contain mx-auto rounded-xl transition-transform duration-200 group-hover:scale-105"
+                />
+              </Link>
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
                 {title}
-              </h2>
+              </h1>
               {subtitle && (
-                <p className="mt-2 text-sm text-[#6B7280] leading-relaxed">
+                <p className="mt-2 text-sm text-[#94A3B8] leading-relaxed">
                   {subtitle}
                 </p>
               )}
@@ -120,56 +88,74 @@ const AuthLayout = ({
             {/* Form Slot */}
             {typeof children === 'function' ? children({ openLegalModal }) : children}
 
-            {/* Clean Footer / Legal Links */}
-            <div className="mt-6 pt-5 border-t border-[#F1F5F9] text-center text-xs text-[#9CA3AF]">
-              <span>Protected by MaanWin51 Security &middot; </span>
+            {/* Legal Links */}
+            <div className="mt-6 pt-5 border-t border-[#141B2A] text-center text-xs text-[#64748B]">
+              <span>Protected by MaanWin51 &middot; </span>
               <button
                 type="button"
                 onClick={() => openLegalModal('privacy')}
-                className="underline hover:text-[#111827] cursor-pointer"
+                className="text-amber-400 hover:text-amber-300 underline cursor-pointer"
               >
-                Privacy
+                Privacy Policy
               </button>
               <span> &middot; </span>
               <button
                 type="button"
                 onClick={() => openLegalModal('terms')}
-                className="underline hover:text-[#111827] cursor-pointer"
+                className="text-amber-400 hover:text-amber-300 underline cursor-pointer"
               >
-                Terms
+                Terms of Service
               </button>
             </div>
           </div>
+
+          {/* Trust Highlights below Card */}
+          <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-6 text-xs text-[#94A3B8] mt-6 pt-4 border-t border-[#1E283D]/60">
+            <span className="flex items-center gap-1.5">
+              <Lock className="w-3.5 h-3.5 text-emerald-400" />
+              <span>256-Bit SSL Protection</span>
+            </span>
+            <span className="flex items-center gap-1.5">
+              <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
+              <span>Provably Fair</span>
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Zap className="w-3.5 h-3.5 text-blue-400" />
+              <span>Instant Access</span>
+            </span>
+          </div>
         </div>
       </main>
+
+      <Footer />
 
       {/* Terms / Privacy Modal Dialog */}
       {modalContent && (
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs animate-in fade-in"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in"
         >
-          <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl border border-[#E5E7EB]">
-            <div className="flex items-center justify-between pb-4 border-b border-[#E5E7EB]">
-              <h3 className="text-lg font-bold text-[#111827]">{modalContent.title}</h3>
+          <div className="bg-[#0F1420] rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-[#1E283D] text-white">
+            <div className="flex items-center justify-between pb-4 border-b border-[#1E283D]">
+              <h3 className="text-lg font-bold text-white">{modalContent.title}</h3>
               <button
                 type="button"
                 onClick={() => setModalContent(null)}
-                className="p-1 rounded-lg hover:bg-slate-100 text-[#6B7280] cursor-pointer"
+                className="p-1.5 rounded-lg hover:bg-[#141B2A] text-[#94A3B8] hover:text-white transition-colors cursor-pointer"
                 aria-label="Close"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
-            <div className="py-4 text-sm text-[#4B5563] leading-relaxed max-h-72 overflow-y-auto">
+            <div className="py-4 text-sm text-[#94A3B8] leading-relaxed max-h-72 overflow-y-auto">
               {modalContent.text}
             </div>
-            <div className="pt-4 border-t border-[#E5E7EB] flex justify-end">
+            <div className="pt-4 border-t border-[#1E283D] flex justify-end">
               <button
                 type="button"
                 onClick={() => setModalContent(null)}
-                className="px-5 py-2.5 bg-[#E53935] hover:bg-[#C62828] text-white text-sm font-semibold rounded-xl cursor-pointer"
+                className="px-5 py-2.5 bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-500 text-black text-sm font-extrabold rounded-xl shadow-lg shadow-amber-500/20 cursor-pointer"
               >
                 I Understand
               </button>
