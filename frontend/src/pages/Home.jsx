@@ -48,7 +48,7 @@ const Home = () => {
   const [selectedDemoColor, setSelectedDemoColor] = useState('green');
 
   useEffect(() => {
-    document.title = 'Official Colour Trading Game App — Login, Register & App Download';
+    document.title = 'MaanWin51 Official — Colour Trading Game, Login, Register & App Download';
 
     const timer = setInterval(() => {
       setCountdown((prev) => (prev <= 1 ? 60 : prev - 1));
@@ -194,11 +194,10 @@ const Home = () => {
           </div>
 
           {/* Main Headline */}
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.15]">
+          <h1 className="mx-auto max-w-5xl text-balance break-words text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-white tracking-tight leading-[1.15]">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500">
-              Official
-            </span>{' '}
-            — Colour Trading &amp; Game App
+              MaanWin51 Official
+            </span>{' '}— Colour Trading Game, Login, Register &amp; App Download
           </h1>
 
           {/* Subtitle */}
