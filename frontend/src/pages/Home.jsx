@@ -33,6 +33,8 @@ import {
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
 import { useAuth } from '../context/AuthContext';
+import TelegramIcon from '../components/common/TelegramIcon';
+import { EXTERNAL_LINKS } from '../utils/constants';
 
 const Home = () => {
   const { isAuthenticated } = useAuth();
@@ -217,20 +219,20 @@ const Home = () => {
               </Link>
             ) : (
               <>
-                <Link
-                  to="/register"
-                  className="flex-1 min-w-[150px] h-13 px-6 bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-500 text-black font-black text-sm sm:text-base rounded-xl shadow-lg shadow-amber-500/25 flex items-center justify-center gap-2 transition-all active:scale-95"
+                <a
+                  href={EXTERNAL_LINKS.REGISTER}
+                  className="flex-1 min-w-[150px] h-13 px-6 bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-500 text-black font-black text-sm sm:text-base rounded-xl shadow-lg shadow-amber-500/25 flex items-center justify-center gap-2 transition-all active:scale-95 cursor-pointer"
                 >
                   <Sparkles className="w-4 h-4 text-black" />
                   <span>Register Now</span>
-                </Link>
+                </a>
 
-                <Link
-                  to="/login"
-                  className="flex-1 min-w-[130px] h-13 px-6 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-black text-sm sm:text-base rounded-xl shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2 transition-all active:scale-95"
+                <a
+                  href={EXTERNAL_LINKS.LOGIN}
+                  className="flex-1 min-w-[130px] h-13 px-6 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-black text-sm sm:text-base rounded-xl shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2 transition-all active:scale-95 cursor-pointer"
                 >
                   <span>Log In</span>
-                </Link>
+                </a>
               </>
             )}
 
@@ -392,13 +394,13 @@ const Home = () => {
                 </p>
               </div>
               <div className="pt-6 mt-4 border-t border-[#161E2E]">
-                <Link
-                  to="/login"
+                <a
+                  href={EXTERNAL_LINKS.LOGIN}
                   className="text-sm font-bold text-[#F59E0B] hover:text-[#FBBF24] inline-flex items-center gap-1.5 group-hover:translate-x-1 transition-all"
                 >
                   <span>Login Now</span>
                   <span className="text-base leading-none">&rarr;</span>
-                </Link>
+                </a>
               </div>
             </div>
 
@@ -414,13 +416,13 @@ const Home = () => {
                 </p>
               </div>
               <div className="pt-6 mt-4 border-t border-[#161E2E]">
-                <Link
-                  to="/register"
+                <a
+                  href={EXTERNAL_LINKS.REGISTER}
                   className="text-sm font-bold text-[#F59E0B] hover:text-[#FBBF24] inline-flex items-center gap-1.5 group-hover:translate-x-1 transition-all"
                 >
                   <span>Register Free</span>
                   <span className="text-base leading-none">&rarr;</span>
-                </Link>
+                </a>
               </div>
             </div>
 
@@ -1005,13 +1007,13 @@ const Home = () => {
                 </ol>
               </div>
 
-              <Link
-                to="/register"
+              <a
+                href={EXTERNAL_LINKS.REGISTER}
                 className="w-full h-12 flex items-center justify-center gap-2 rounded-xl bg-[#162032] hover:bg-[#1E2B44] text-white font-bold text-sm border border-[#232F46] transition-all"
               >
                 <span>Launch Web Version</span>
                 <ArrowRight className="w-4 h-4" />
-              </Link>
+              </a>
             </div>
           </div>
         </div>
@@ -1084,19 +1086,19 @@ const Home = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
-              <Link
-                to="/register"
+              <a
+                href={EXTERNAL_LINKS.REGISTER}
                 className="w-full sm:w-auto h-12 px-7 bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-500 text-black font-extrabold text-sm rounded-xl shadow-lg shadow-amber-500/25 flex items-center justify-center gap-2 transition-all active:scale-95"
               >
                 <span>Create Account</span>
                 <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link
-                to="/login"
+              </a>
+              <a
+                href={EXTERNAL_LINKS.LOGIN}
                 className="w-full sm:w-auto h-12 px-6 bg-[#0F1420] hover:bg-[#161D2C] text-white font-bold text-sm rounded-xl border border-[#232F46] transition-all flex items-center justify-center shadow-xs"
               >
                 <span>Sign In</span>
-              </Link>
+              </a>
             </div>
           </div>
         </div>

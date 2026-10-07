@@ -17,11 +17,9 @@ const Register = () => {
 
   return (
     <AuthLayout
-      title="Create Your Account"
-      subtitle="Register using your phone number or email."
       showBack
-      backTo="/login"
-      backLabel="Back to Login"
+      backTo="/"
+      backLabel="Back"
     >
       {({ openLegalModal }) => <RegisterForm openLegalModal={openLegalModal} />}
     </AuthLayout>

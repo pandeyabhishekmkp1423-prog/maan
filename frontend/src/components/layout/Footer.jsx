@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ShieldCheck, Lock, ArrowUp } from 'lucide-react';
+import TelegramIcon from '../common/TelegramIcon';
+import { EXTERNAL_LINKS } from '../../utils/constants';
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -35,6 +37,19 @@ const Footer = () => {
                 <Lock className="w-3.5 h-3.5 text-amber-400" />
                 <span>RNG Certified</span>
               </div>
+            </div>
+
+            {/* Telegram Channel Button in Footer */}
+            <div className="pt-2">
+              <a
+                href={EXTERNAL_LINKS.TELEGRAM}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#229ED9]/15 hover:bg-[#229ED9]/25 border border-[#229ED9]/30 text-[#229ED9] text-xs font-bold transition-all shadow-xs cursor-pointer active:scale-95"
+              >
+                <TelegramIcon className="w-4 h-4 fill-[#229ED9]" />
+                <span>Join Official Telegram Channel</span>
+              </a>
             </div>
           </div>
 
@@ -72,10 +87,16 @@ const Footer = () => {
             </h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/login" className="text-[#94A3B8] hover:text-amber-400 transition-colors">User Login</Link>
+                <a href={EXTERNAL_LINKS.LOGIN} className="text-[#94A3B8] hover:text-amber-400 transition-colors">User Login</a>
               </li>
               <li>
-                <Link to="/register" className="text-[#94A3B8] hover:text-amber-400 transition-colors">Create Account</Link>
+                <a href={EXTERNAL_LINKS.REGISTER} className="text-[#94A3B8] hover:text-amber-400 transition-colors">Create Account</a>
+              </li>
+              <li>
+                <a href={EXTERNAL_LINKS.TELEGRAM} target="_blank" rel="noopener noreferrer" className="text-[#229ED9] hover:underline font-semibold flex items-center gap-1.5">
+                  <TelegramIcon className="w-3.5 h-3.5 fill-[#229ED9]" />
+                  <span>Official Telegram</span>
+                </a>
               </li>
               <li>
                 <Link to="/forgot-password" className="text-[#94A3B8] hover:text-amber-400 transition-colors">Forgot Password</Link>
@@ -98,6 +119,12 @@ const Footer = () => {
               Support &amp; Legal
             </h4>
             <ul className="space-y-2 text-sm">
+              <li>
+                <a href={EXTERNAL_LINKS.TELEGRAM} target="_blank" rel="noopener noreferrer" className="text-[#229ED9] hover:underline font-semibold flex items-center gap-1.5">
+                  <TelegramIcon className="w-3.5 h-3.5 fill-[#229ED9]" />
+                  <span>24/7 Telegram Support</span>
+                </a>
+              </li>
               <li>
                 <a href="#how-to-play" className="text-[#94A3B8] hover:text-amber-400 transition-colors">How to Play Guide</a>
               </li>

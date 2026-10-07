@@ -15,6 +15,7 @@ import {
   validatePassword,
   validateConfirmPassword,
 } from '../utils/validation';
+import { EXTERNAL_LINKS } from '../utils/constants';
 
 const ForgotPassword = () => {
   const [searchParams] = useSearchParams();
@@ -187,12 +188,12 @@ const ForgotPassword = () => {
                 </div>
               )}
 
-              <Link
-                to="/login"
+              <a
+                href={EXTERNAL_LINKS.LOGIN}
                 className="inline-flex items-center justify-center gap-2 text-sm font-semibold text-amber-400 hover:text-amber-300 hover:underline"
               >
                 Return to Login
-              </Link>
+              </a>
             </div>
           ) : (
             <form onSubmit={handleRequestSubmit} noValidate className="space-y-5">
@@ -236,12 +237,12 @@ const ForgotPassword = () => {
               </Button>
 
               <div className="text-center pt-2">
-                <Link
-                  to="/login"
+                <a
+                  href={EXTERNAL_LINKS.LOGIN}
                   className="text-xs sm:text-sm font-semibold text-[#94A3B8] hover:text-white hover:underline"
                 >
                   Remembered your password? Log in
-                </Link>
+                </a>
               </div>
             </form>
           )}
@@ -268,7 +269,7 @@ const ForgotPassword = () => {
                 type="button"
                 variant="primary"
                 fullWidth
-                onClick={() => navigate('/login')}
+                onClick={() => { window.location.href = EXTERNAL_LINKS.LOGIN; }}
               >
                 Go to Log In
               </Button>

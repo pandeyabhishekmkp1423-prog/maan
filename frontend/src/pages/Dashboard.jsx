@@ -250,32 +250,65 @@ const Dashboard = () => {
             </div>
 
             {/* Invite / Referral Code */}
-            <div className="p-4 rounded-2xl bg-gradient-to-r from-[#141B2A] to-[#0A0D15] border border-amber-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <div>
-                <span className="text-xs font-bold text-amber-400 uppercase tracking-wider block">
-                  Your Personal Invite Code
-                </span>
-                <span className="text-lg font-mono font-extrabold text-white">
-                  {user?.invite_code || 'MWDEFAULT'}
-                </span>
+            <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-[#141B2A] to-[#0A0D15] border border-amber-500/30 flex flex-col gap-3">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                  <span className="text-xs font-bold text-amber-400 uppercase tracking-wider block">
+                    Your Unique Referral Code
+                  </span>
+                  <div className="flex items-center gap-2 mt-0.5">
+                    <span className="text-xl font-mono font-extrabold text-white tracking-widest bg-[#0b1222] px-3 py-1 rounded-xl border border-amber-500/20">
+                      {user?.invite_code || 'MWDEFAULT'}
+                    </span>
+                    <span className="text-[11px] font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                      Active &bull; Verified
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={handleCopyInviteCode}
+                    className="inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-500 text-xs font-extrabold text-black rounded-xl shadow-lg shadow-amber-500/20 transition-all cursor-pointer active:scale-95"
+                  >
+                    {copied ? (
+                      <>
+                        <Check className="w-4 h-4 stroke-[3]" />
+                        <span>Copied!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-4 h-4" />
+                        <span>Copy Code</span>
+                      </>
+                    )}
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const link = `${window.location.origin}/register?ref=${user?.invite_code || ''}`;
+                      navigator.clipboard.writeText(link);
+                      setCopied(true);
+                      setTimeout(() => setCopied(false), 2000);
+                    }}
+                    className="inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white text-xs font-bold rounded-xl border border-slate-700 transition-all cursor-pointer active:scale-95"
+                    title="Copy registration referral URL"
+                  >
+                    <span>Copy Link</span>
+                  </button>
+                </div>
               </div>
-              <button
-                type="button"
-                onClick={handleCopyInviteCode}
-                className="inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-500 text-xs font-extrabold text-black rounded-xl shadow-lg shadow-amber-500/20 transition-all cursor-pointer"
-              >
-                {copied ? (
-                  <>
-                    <Check className="w-4 h-4 stroke-[3]" />
-                    <span>Copied!</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-4 h-4" />
-                    <span>Copy Code</span>
-                  </>
-                )}
-              </button>
+
+              {user?.referred_by_code && (
+                <div className="pt-2 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+                  <span>Referred by Sponsor:</span>
+                  <span className="font-mono font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-lg border border-amber-500/20">
+                    {user.referred_by_code}
+                  </span>
+                </div>
+              )}
             </div>
           </div>
 

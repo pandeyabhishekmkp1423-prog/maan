@@ -17,8 +17,9 @@ const Login = () => {
 
   return (
     <AuthLayout
-      title="Welcome Back"
-      subtitle="Sign in to continue to your MaanWin51 account."
+      showBack
+      backTo="/"
+      backLabel="Back"
     >
       <LoginForm />
     </AuthLayout>

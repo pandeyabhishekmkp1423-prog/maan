@@ -1,256 +1,306 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Mail, Gift } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
-import AuthTabs from './AuthTabs';
-import PhoneInput from './PhoneInput';
-import PasswordInput from './PasswordInput';
-import Input from '../common/Input';
-import Button from '../common/Button';
-import Checkbox from '../common/Checkbox';
-import Alert from '../common/Alert';
-import {
-  validateEmail,
-  validatePhone,
-  validatePassword,
-  validateConfirmPassword,
-} from '../../utils/validation';
+import { useSearchParams } from 'react-router-dom';
+import { COUNTRY_CODES } from './PhoneInput';
+import { redirectToRegister, redirectToLogin } from '../../utils/constants';
 
-const RegisterForm = ({ openLegalModal }) => {
-  const { register } = useAuth();
-  const navigate = useNavigate();
+/**
+ * Custom closed eye icon with eyelashes matching screenshot
+ */
+const ClosedEyeLashesIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    className="w-[18px] h-[18px] text-[#60718d] hover:text-slate-300 transition-colors"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M2 10.5c2.5 3 6.5 4.5 10 4.5s7.5-1.5 10-4.5" />
+    <line x1="3.5" y1="13" x2="2.5" y2="15.5" />
+    <line x1="7.5" y1="14.5" x2="6.5" y2="17.5" />
+    <line x1="12" y1="15" x2="12" y2="18.5" />
+    <line x1="16.5" y1="14.5" x2="17.5" y2="17.5" />
+    <line x1="20.5" y1="13" x2="21.5" y2="15.5" />
+  </svg>
+);
+
+const OpenEyeIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    className="w-[18px] h-[18px] text-[#ff9900] hover:text-amber-300 transition-colors"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" />
+    <circle cx="12" cy="12" r="3" />
+  </svg>
+);
+
+const RegisterForm = () => {
+  const [searchParams] = useSearchParams();
+
+  // Support ?inviteCode=PXUCQ4N&from=web as seen in the reference screenshot
+  const queryInvite =
+    searchParams.get('inviteCode') ||
+    searchParams.get('invite') ||
+    searchParams.get('ref') ||
+    searchParams.get('code') ||
+    'PXUCQ4N';
 
   // Form State
-  const [method, setMethod] = useState('phone'); // 'phone' | 'email'
   const [countryCode, setCountryCode] = useState('+91');
+  const [countryDropdownOpen, setCountryDropdownOpen] = useState(false);
   const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [inviteCode, setInviteCode] = useState('');
-  const [consent, setConsent] = useState(false);
+  const [inviteCode, setInviteCode] = useState(queryInvite.toUpperCase());
 
-  // Status State
-  const [errors, setErrors] = useState({});
-  const [serverError, setServerError] = useState('');
-  const [loading, setLoading] = useState(false);
+  // Password visibility states
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const handleFieldChange = (field, setter) => (val) => {
-    setter(val);
-    if (errors[field]) {
-      setErrors((prev) => {
-        const next = { ...prev };
-        delete next[field];
-        return next;
-      });
-    }
-    if (serverError) setServerError('');
+  const selectedCountry = COUNTRY_CODES.find((c) => c.code === countryCode) || COUNTRY_CODES[0];
+
+  const handleRegisterClick = (e) => {
+    if (e) e.preventDefault();
+    redirectToRegister(inviteCode);
   };
 
-  const handleTabChange = (newTab) => {
-    setMethod(newTab);
-    setErrors({});
-    setServerError('');
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setServerError('');
-
-    const newErrors = {};
-
-    if (method === 'phone') {
-      const phoneErr = validatePhone(phone, countryCode);
-      if (phoneErr) newErrors.phone = phoneErr;
-    } else {
-      const emailErr = validateEmail(email);
-      if (emailErr) newErrors.email = emailErr;
-    }
-
-    const pwdErr = validatePassword(password);
-    if (pwdErr) newErrors.password = pwdErr;
-
-    const confirmErr = validateConfirmPassword(password, confirmPassword);
-    if (confirmErr) newErrors.confirm_password = confirmErr;
-
-    if (!consent) {
-      newErrors.consent = 'You must agree to the Privacy Policy and Terms & Conditions to proceed.';
-    }
-
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
-    }
-
-    setLoading(true);
-
-    try {
-      const payload = {
-        method,
-        password,
-        confirm_password: confirmPassword,
-        invite_code: inviteCode.trim(),
-        consent: true,
-        ...(method === 'phone' ? { country_code: countryCode, phone } : { email }),
-      };
-
-      // Calls register API -> sets session cookie -> updates AuthContext
-      const res = await register(payload);
-
-      // AUTOMATIC LOGIN AFTER REGISTRATION -> Redirect directly to /dashboard
-      if (res && res.authenticated) {
-        navigate('/dashboard', { replace: true });
-      }
-    } catch (err) {
-      if (err.errors && typeof err.errors === 'object') {
-        setErrors(err.errors);
-      }
-      setServerError(err.message || 'Registration failed. Please check your information and try again.');
-    } finally {
-      setLoading(false);
-    }
+  const handleLoginClick = (e) => {
+    if (e) e.preventDefault();
+    redirectToLogin();
   };
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="space-y-4 sm:space-y-5">
-      {serverError && (
-        <Alert
-          type="error"
-          message={serverError}
-          onClose={() => setServerError('')}
-        />
-      )}
+    <form onSubmit={handleRegisterClick} noValidate className="w-full">
+      {/* INPUTS LIST */}
+      <div className="space-y-3">
+        {/* ============================================================ */}
+        {/* 1. PHONE NUMBER INPUT ROW */}
+        {/* ============================================================ */}
+        <div>
+          <div className="relative flex items-center h-[48px] rounded-xl px-3.5 bg-[#0e1627]/85 border border-[#1d2940] hover:border-[#2b3a59] focus-within:border-[#38517e] transition-colors">
+            {/* Phone Icon */}
+            <svg
+              viewBox="0 0 24 24"
+              className="w-[18px] h-[18px] text-[#60718d] shrink-0 mr-3"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <rect width="14" height="20" x="5" y="2" rx="2" ry="2" />
+              <line x1="12" x2="12.01" y1="18" y2="18" />
+            </svg>
 
-      {/* Phone / Email Selector Tabs */}
-      <AuthTabs activeTab={method} onChange={handleTabChange} />
-
-      {/* Dynamic Method Input */}
-      {method === 'phone' ? (
-        <PhoneInput
-          id="register-phone"
-          label="Phone Number"
-          countryCode={countryCode}
-          onCountryCodeChange={(code) => setCountryCode(code)}
-          phone={phone}
-          onPhoneChange={handleFieldChange('phone', setPhone)}
-          error={errors.phone}
-          disabled={loading}
-          required
-        />
-      ) : (
-        <Input
-          id="register-email"
-          label="Email Address"
-          type="email"
-          name="email"
-          value={email}
-          onChange={(e) => handleFieldChange('email', setEmail)(e.target.value)}
-          placeholder="name@example.com"
-          autoComplete="email"
-          icon={Mail}
-          error={errors.email}
-          disabled={loading}
-          required
-        />
-      )}
-
-      {/* Password Input */}
-      <PasswordInput
-        id="register-password"
-        name="password"
-        label="Create Password"
-        value={password}
-        onChange={(e) => handleFieldChange('password', setPassword)(e.target.value)}
-        placeholder="At least 8 characters"
-        autoComplete="new-password"
-        error={errors.password}
-        disabled={loading}
-        required
-      />
-
-      {/* Confirm Password Input */}
-      <PasswordInput
-        id="register-confirm-password"
-        name="confirm_password"
-        label="Confirm Password"
-        value={confirmPassword}
-        onChange={(e) => handleFieldChange('confirm_password', setConfirmPassword)(e.target.value)}
-        placeholder="Re-enter your password"
-        autoComplete="new-password"
-        error={errors.confirm_password}
-        disabled={loading}
-        required
-      />
-
-      {/* Invite Code (Optional) */}
-      <Input
-        id="register-invite-code"
-        label="Invite Code (Optional)"
-        name="invite_code"
-        value={inviteCode}
-        onChange={(e) => handleFieldChange('invite_code', setInviteCode)(e.target.value.toUpperCase())}
-        placeholder="Enter referral / invite code"
-        icon={Gift}
-        error={errors.invite_code}
-        disabled={loading}
-      />
-
-      {/* Terms & Privacy Consent Checkbox */}
-      <div className="pt-1">
-        <Checkbox
-          id="register-consent"
-          name="consent"
-          checked={consent}
-          onChange={(val) => handleFieldChange('consent', setConsent)(val)}
-          disabled={loading}
-          error={errors.consent}
-          label={
-            <span>
-              I have read and agree to the{' '}
+            {/* Country Code (+91) */}
+            <div className="relative">
               <button
                 type="button"
-                onClick={() => openLegalModal && openLegalModal('privacy')}
-                className="text-amber-400 font-semibold hover:text-amber-300 hover:underline cursor-pointer"
+                onClick={() => setCountryDropdownOpen((prev) => !prev)}
+                className="text-white font-bold text-sm mr-3 select-none hover:text-amber-300 transition-colors cursor-pointer"
+                aria-label="Select Country Code"
               >
-                Privacy Policy
-              </button>{' '}
-              and{' '}
-              <button
-                type="button"
-                onClick={() => openLegalModal && openLegalModal('terms')}
-                className="text-amber-400 font-semibold hover:text-amber-300 hover:underline cursor-pointer"
-              >
-                Terms &amp; Conditions
+                {selectedCountry.code}
               </button>
-              .
-            </span>
-          }
-        />
+
+              {countryDropdownOpen && (
+                <div className="absolute left-0 top-9 z-50 w-48 max-h-52 overflow-y-auto bg-[#0d162a] rounded-xl shadow-2xl border border-[#233558] py-1">
+                  {COUNTRY_CODES.map((item) => (
+                    <button
+                      key={item.code + item.country}
+                      type="button"
+                      onClick={() => {
+                        setCountryCode(item.code);
+                        setCountryDropdownOpen(false);
+                      }}
+                      className={`w-full text-left px-3 py-2 text-xs flex items-center justify-between hover:bg-[#15233f] cursor-pointer ${
+                        item.code === countryCode
+                          ? 'bg-amber-500/20 text-amber-300 font-bold'
+                          : 'text-slate-200'
+                      }`}
+                    >
+                      <span className="flex items-center gap-1.5">
+                        <span>{item.flag}</span>
+                        <span>{item.country}</span>
+                      </span>
+                      <span className="font-semibold text-slate-400">{item.code}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Phone Input Field */}
+            <input
+              type="tel"
+              id="register-phone"
+              name="phone"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value.replace(/\D/g, ''))}
+              placeholder="Enter your phone number"
+              className="w-full bg-transparent text-white placeholder-[#60718d] text-sm outline-none font-medium"
+              autoComplete="tel"
+            />
+          </div>
+        </div>
+
+        {/* ============================================================ */}
+        {/* 2. PASSWORD INPUT ROW */}
+        {/* ============================================================ */}
+        <div>
+          <div className="relative flex items-center h-[48px] rounded-xl px-3.5 bg-[#0e1627]/85 border border-[#1d2940] hover:border-[#2b3a59] focus-within:border-[#38517e] transition-colors">
+            {/* Padlock Icon */}
+            <svg
+              viewBox="0 0 24 24"
+              className="w-[18px] h-[18px] text-[#60718d] shrink-0 mr-3"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
+
+            <input
+              type={showPassword ? 'text' : 'password'}
+              id="register-password"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password:8-15 letters and numbers"
+              className="w-full bg-transparent text-white placeholder-[#60718d] text-sm outline-none font-medium pr-8"
+              autoComplete="new-password"
+            />
+
+            {/* Eye Toggle with eyelashes */}
+            <button
+              type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute right-3.5 p-1 cursor-pointer select-none"
+              aria-label={showPassword ? 'Hide password' : 'Show password'}
+            >
+              {showPassword ? <OpenEyeIcon /> : <ClosedEyeLashesIcon />}
+            </button>
+          </div>
+        </div>
+
+        {/* ============================================================ */}
+        {/* 3. CONFIRM PASSWORD INPUT ROW */}
+        {/* ============================================================ */}
+        <div>
+          <div className="relative flex items-center h-[48px] rounded-xl px-3.5 bg-[#0e1627]/85 border border-[#1d2940] hover:border-[#2b3a59] focus-within:border-[#38517e] transition-colors">
+            {/* Padlock Icon */}
+            <svg
+              viewBox="0 0 24 24"
+              className="w-[18px] h-[18px] text-[#60718d] shrink-0 mr-3"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
+
+            <input
+              type={showConfirmPassword ? 'text' : 'password'}
+              id="register-confirm-password"
+              name="confirm_password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="Enter the password again"
+              className="w-full bg-transparent text-white placeholder-[#60718d] text-sm outline-none font-medium pr-8"
+              autoComplete="new-password"
+            />
+
+            {/* Eye Toggle with eyelashes */}
+            <button
+              type="button"
+              onClick={() => setShowConfirmPassword((prev) => !prev)}
+              className="absolute right-3.5 p-1 cursor-pointer select-none"
+              aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
+            >
+              {showConfirmPassword ? <OpenEyeIcon /> : <ClosedEyeLashesIcon />}
+            </button>
+          </div>
+        </div>
+
+        {/* ============================================================ */}
+        {/* 4. REFERRAL CODE ROW (PXUCQ4N) */}
+        {/* ============================================================ */}
+        <div>
+          <div className="relative flex items-center h-[48px] rounded-xl px-3.5 bg-[#0e1627]/85 border border-[#1d2940] hover:border-[#2b3a59] focus-within:border-[#38517e] transition-colors">
+            {/* Shield Icon */}
+            <svg
+              viewBox="0 0 24 24"
+              className="w-[18px] h-[18px] text-[#60718d] shrink-0 mr-3"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              <path d="M12 8v5" />
+              <circle cx="12" cy="15" r="1" />
+            </svg>
+
+            <input
+              type="text"
+              id="register-invite-code"
+              name="invite_code"
+              value={inviteCode}
+              onChange={(e) => setInviteCode(e.target.value.toUpperCase())}
+              placeholder="PXUCQ4N"
+              className="w-full bg-transparent text-white placeholder-[#60718d] text-sm outline-none font-semibold uppercase tracking-wider"
+            />
+          </div>
+        </div>
       </div>
 
-      {/* Submit Button */}
-      <Button
-        type="submit"
-        variant="primary"
-        loading={loading}
-        loadingText="Creating account..."
-        disabled={loading}
-        fullWidth
-        className="mt-2"
+      {/* ============================================================ */}
+      {/* 5. BONUS CHIP (+3~299) */}
+      {/* ============================================================ */}
+      <div className="mt-4 mb-2 flex justify-center">
+        <div className="inline-flex items-center gap-1 px-3 py-0.5 rounded-full bg-[#52330a]/85 border border-[#94621c]/60 text-[#ffbe3b] text-[11px] font-black tracking-wide shadow-sm">
+          <span className="text-xs select-none">🪙</span>
+          <span>+3~299</span>
+        </div>
+      </div>
+
+      {/* ============================================================ */}
+      {/* 6. REGISTER BUTTON (ORANGE GLOW PILL -> REDIRECTS TO REGISTER) */}
+      {/* ============================================================ */}
+      <button
+        type="button"
+        onClick={handleRegisterClick}
+        className="w-full h-[48px] rounded-full font-bold text-[16px] text-white transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-orange-500/25 hover:brightness-105 active:scale-[0.99] tracking-wide"
+        style={{
+          background: 'linear-gradient(90deg, #ff7a00 0%, #ffa000 100%)',
+        }}
       >
-        Create Account
-      </Button>
+        <span>Register</span>
+      </button>
 
-      {/* Login Redirect Link */}
-      <div className="text-center pt-2 text-sm text-[#94A3B8]">
-        Already have an account?{' '}
-        <Link
-          to="/login"
-          className="font-bold text-amber-400 hover:text-amber-300 hover:underline transition-colors"
-        >
-          Log in
-        </Link>
-      </div>
+      {/* ============================================================ */}
+      {/* 7. PASSWORD LOGIN BUTTON (OUTLINED ORANGE PILL -> REDIRECTS TO LOGIN) */}
+      {/* ============================================================ */}
+      <button
+        type="button"
+        onClick={handleLoginClick}
+        className="mt-3 w-full h-[48px] rounded-full font-bold text-[16px] text-[#ff7a00] border border-[#ff7a00] bg-transparent hover:bg-[#ff7a00]/10 transition-all duration-200 flex items-center justify-center cursor-pointer active:scale-[0.99] tracking-wide"
+      >
+        <span>Password Login</span>
+      </button>
     </form>
   );
 };

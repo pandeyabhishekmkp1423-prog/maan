@@ -10,6 +10,8 @@ import {
   Download,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import TelegramIcon from '../common/TelegramIcon';
+import { EXTERNAL_LINKS } from '../../utils/constants';
 
 const Navbar = () => {
   const { isAuthenticated, user, logout } = useAuth();
@@ -99,6 +101,18 @@ const Navbar = () => {
 
           {/* Right Action Buttons */}
           <div className="hidden sm:flex items-center gap-3">
+            {/* Telegram Link with Icon */}
+            <a
+              href={EXTERNAL_LINKS.TELEGRAM}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#229ED9]/15 hover:bg-[#229ED9]/25 border border-[#229ED9]/30 text-[#229ED9] text-xs sm:text-sm font-bold transition-all shadow-xs cursor-pointer active:scale-95"
+              aria-label="Join Official Telegram"
+            >
+              <TelegramIcon className="w-4 h-4 fill-[#229ED9]" />
+              <span className="hidden md:inline">Telegram</span>
+            </a>
+
             {isAuthenticated ? (
               <div className="flex items-center gap-2.5">
                 <Link
@@ -122,33 +136,43 @@ const Navbar = () => {
               </div>
             ) : (
               <>
-                <Link
-                  to="/login"
-                  className="px-5 py-2 text-xs sm:text-sm font-bold text-white bg-[#2563EB] hover:bg-[#1D4ED8] active:scale-95 rounded-xl transition-all shadow-md shadow-blue-600/30"
+                <a
+                  href={EXTERNAL_LINKS.LOGIN}
+                  className="px-5 py-2 text-xs sm:text-sm font-bold text-white bg-[#2563EB] hover:bg-[#1D4ED8] active:scale-95 rounded-xl transition-all shadow-md shadow-blue-600/30 cursor-pointer"
                 >
                   Log In
-                </Link>
+                </a>
 
-                <Link
-                  to="/register"
-                  className="relative group px-5 py-2 text-xs sm:text-sm font-black text-black bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-500 active:scale-95 rounded-xl transition-all shadow-md shadow-amber-500/25 flex items-center gap-1.5"
+                <a
+                  href={EXTERNAL_LINKS.REGISTER}
+                  className="relative group px-5 py-2 text-xs sm:text-sm font-black text-black bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-500 active:scale-95 rounded-xl transition-all shadow-md shadow-amber-500/25 flex items-center gap-1.5 cursor-pointer"
                 >
                   <Sparkles className="w-3.5 h-3.5 text-black" />
                   <span>Register</span>
-                </Link>
+                </a>
               </>
             )}
           </div>
 
           {/* Mobile Menu Toggle Button */}
           <div className="flex sm:hidden items-center gap-2">
+            <a
+              href={EXTERNAL_LINKS.TELEGRAM}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 rounded-xl bg-[#229ED9]/15 text-[#229ED9] border border-[#229ED9]/30"
+              aria-label="Telegram"
+            >
+              <TelegramIcon className="w-4 h-4 fill-[#229ED9]" />
+            </a>
+
             {!isAuthenticated && (
-              <Link
-                to="/register"
+              <a
+                href={EXTERNAL_LINKS.REGISTER}
                 className="px-3 py-1.5 text-xs font-bold text-black bg-gradient-to-r from-amber-500 to-amber-400 rounded-xl shadow-xs"
               >
                 Register
-              </Link>
+              </a>
             )}
 
             <button
@@ -200,19 +224,31 @@ const Navbar = () => {
                 </button>
               </>
             ) : (
-              <div className="grid grid-cols-2 gap-2.5">
-                <Link
-                  to="/login"
-                  className="h-11 flex items-center justify-center text-sm font-bold text-white bg-[#2563EB] hover:bg-[#1D4ED8] rounded-xl shadow-md shadow-blue-600/30"
+              <div className="space-y-2.5">
+                <a
+                  href={EXTERNAL_LINKS.TELEGRAM}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full h-11 flex items-center justify-center gap-2 bg-[#229ED9]/15 hover:bg-[#229ED9]/25 border border-[#229ED9]/30 text-[#229ED9] text-sm font-bold rounded-xl transition-colors cursor-pointer"
                 >
-                  Log In
-                </Link>
-                <Link
-                  to="/register"
-                  className="h-11 flex items-center justify-center text-sm font-black text-black bg-gradient-to-r from-amber-500 to-amber-400 rounded-xl shadow-md shadow-amber-500/25"
-                >
-                  Register
-                </Link>
+                  <TelegramIcon className="w-4 h-4 fill-[#229ED9]" />
+                  <span>Join Official Telegram Channel</span>
+                </a>
+
+                <div className="grid grid-cols-2 gap-2.5">
+                  <a
+                    href={EXTERNAL_LINKS.LOGIN}
+                    className="h-11 flex items-center justify-center text-sm font-bold text-white bg-[#2563EB] hover:bg-[#1D4ED8] rounded-xl shadow-md shadow-blue-600/30 cursor-pointer"
+                  >
+                    Log In
+                  </a>
+                  <a
+                    href={EXTERNAL_LINKS.REGISTER}
+                    className="h-11 flex items-center justify-center text-sm font-black text-black bg-gradient-to-r from-amber-500 to-amber-400 rounded-xl shadow-md shadow-amber-500/25 cursor-pointer"
+                  >
+                    Register
+                  </a>
+                </div>
               </div>
             )}
           </div>
